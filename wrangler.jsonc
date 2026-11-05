@@ -1,0 +1,59 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "hossdan",
+	"main": "src/index.js",
+	"compatibility_date": "2026-11-03",
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "hermes-mini-db",
+			"database_id": "496bebd5-b937-457e-9500-f904d82a4e10"
+		}
+	],
+	"ai": {
+		"binding": "AI"
+	},
+	/**
+	 * Bonus — daily reminder. Cron triggers run in UTC:
+	 * "30 6 * * *" = 06:30 UTC = 10:00 Asia/Tehran (UTC+03:30, no DST).
+	 */
+	"triggers": {
+		"crons": ["30 6 * * *"]
+	}
+	/**
+	 * Smart Placement
+	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
+	 */
+	// "placement": {  "mode": "smart" }
+	/**
+	 * Bindings
+	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
+	 * databases, object storage, AI inference, real-time communication and more.
+	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
+	 */
+	/**
+	 * Environment Variables
+	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
+	 * Note: Use secrets to store sensitive data.
+	 * https://developers.cloudflare.com/workers/configuration/secrets/
+	 */
+	// "vars": {  "MY_VARIABLE": "production_value" }
+	/**
+	 * Static Assets
+	 * https://developers.cloudflare.com/workers/static-assets/binding/
+	 */
+	// "assets": {  "directory": "./public/",  "binding": "ASSETS" }
+	/**
+	 * Service Bindings (communicate between multiple Workers)
+	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
+	 */
+	// "services": [  {   "binding": "MY_SERVICE",   "service": "my-service"  } ]
+}
